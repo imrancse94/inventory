@@ -1,0 +1,1 @@
+Profil güncellemesine devam etmek için kullanmanız gereken şifre: {{$OTP}}.

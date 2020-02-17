@@ -1,0 +1,9 @@
+.display-block{
+    display: block;
+}
+
+ .table-responsive{
+    margin: 0;
+    width: 100%;
+    padding: 0;
+}

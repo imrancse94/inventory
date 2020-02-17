@@ -1,0 +1,1 @@
+Your login OTP is {{$OTP}}

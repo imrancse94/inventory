@@ -1,0 +1,1 @@
+Your {{$data['amount']}} withdrawal request was rejected.

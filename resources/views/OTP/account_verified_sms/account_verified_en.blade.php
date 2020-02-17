@@ -1,0 +1,1 @@
+Your account has been approved / activated successfully. The Sipay Team
