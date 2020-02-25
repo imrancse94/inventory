@@ -31,10 +31,13 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $cmsInfo['subModuleTitle'] = __("Companies");
-        $cmsInfo['moduleTitle'] = __("Access Control");
-        $cmsInfo['subModuleTitle'] = __("Companies");
-        $companies = Company::orderBy('created_at','DESC')->get();
+        $cmsInfo = [
+            'moduleTitle'=>__("Companies"),
+            'subModuleTitle' =>__("Company Management"),
+            'subTitle'=>__("List")
+        ];
+        $page_limit = 10;
+        $companies = Company::orderBy('created_at','DESC')->paginate($page_limit);
         return view('companies.browse', compact('companies','cmsInfo'));
     }
 
@@ -48,17 +51,19 @@ class CompanyController extends Controller
         if($request->isMethod('post')){
             return $this->store($request);
         }else{
-            $cmsInfo['subModuleTitle'] = __("Companies");
-            $cmsInfo['moduleTitle'] = __("Access Control");
-            $cmsInfo['subModuleTitle'] = __("Companies");
-            $countries = Country::orderBy('country_name','ASC')->get();
+            $cmsInfo = [
+                'moduleTitle'=>__("Companies"),
+                'subModuleTitle' =>__("Company Management"),
+                'subTitle'=>__("Add")
+            ];
+            $countries = [];//Country::orderBy('country_name','ASC')->get();
     //        var_dump($countries);
     //        die();
-            $timezones = Timezone::orderBy('time_zone','ASC')->get();
+            $timezones = [];//Timezone::orderBy('time_zone','ASC')->get();
 
             return view('companies.add')->with(compact('countries', 'timezones','cmsInfo'));
         }
-       
+
 
 
     }
@@ -77,44 +82,16 @@ class CompanyController extends Controller
 
         $rules = [
             'name' => 'required|string',
-            'cname'=>'required|string',
             'cemail'=>'required|email',
-            'address1'=>'required|string',
-            'address2'=>'nullable|string',
-            'city'=>'required|string',
-            'state'=>'required|string',
-            'country'=>'required|string',
-            'postcode'=>'required|string',
-            'phone'=>'required|max:25',
-            'timezone'=>'required|integer',
-            'logo'=>'required|mimes:jpg,png,jpeg',
-            'profile'=>'required|mimes:jpg,png,jpeg',
-            'username' => 'required|min:4|unique:users,username',
-            'email' => 'required|email|unique:users,email',
-            'user_phone' => 'required|unique:users,phone|max:25',
-            'password' => 'required|min:5',
-
         ];
         $request->validate($rules);
-        $company_params = $request->only(array("name","cname","cemail","address1","address2","city","state","country","postcode","phone",
-            "timezone","registration_no","tax_no","no_of_employees","cmmi_level","yearly_revenue","hourly_rate","daily_rate","fax"));
-
-        if($request->hasFile('logo')) {
-            $image = time() . rand(1,1000).'.' . $request->logo->getClientOriginalExtension();
-            $request->logo->move(public_path('uploads/company'), $image);
-            $company_params["logo"] = 'uploads/company/'.$image;
-        }
+        $company_params = $request->only(array("name","cemail"));
 
         //add company
         $company = new Company();
         if ($company->add_company($company_params)){
             //add User Section
             $user_params  = $request->only(array("cname","username", "password","img_path","language","email","user_phone"));
-            if($request->hasFile('profile')) {
-                $profile_img = time() . rand(1,1000).'.' . $request->profile->getClientOriginalExtension();
-                $request->profile->move(public_path('uploads/user_photo'), $profile_img);
-                $user_params["profile"] = 'uploads/user_photo/'.$profile_img;
-            }
             $user_params["company_id"] = $company->id;
             $user_params["user_type"] = Config::get('constants.defines.ADMIN_USER_TYPE');
             $user_model = new \App\User();
@@ -145,7 +122,7 @@ class CompanyController extends Controller
 
                 //add Role page
                 $page_id = array(3078,3075,3068,3067,3066,3065,3058,3057,3056,3055,3049,3048,3047,3046,3045);
-                for ($i=0; $i<count($page_id); $i++){
+                for ($i=0; $i < count($page_id); $i++){
                     $role_page = new  RolePage();
                     $role_page->role_id = $role->id;
                     $role_page->page_id = $page_id[$i];
@@ -164,8 +141,9 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
     public function view($id){
+
         return $this->show($id);
     }
 
@@ -175,6 +153,7 @@ class CompanyController extends Controller
         $cmsInfo['subModuleTitle'] = __("Companies");
         $cmsInfo['moduleTitle'] = __("Access Control");
         $cmsInfo['subModuleTitle'] = __("Companies");
+
         $a_company = Company::find($id);
         return view('companies.browse')->with(compact('a_company','cmsInfo'));
     }
@@ -196,7 +175,7 @@ class CompanyController extends Controller
             $cmsInfo['moduleTitle'] = __("Access Control");
             $cmsInfo['subModuleTitle'] = __("Companies");
             $a_company = Company::find($id);
-            $countries = Country::orderBy('country_name','ASC')->get();
+           // $countries = Country::orderBy('country_name','ASC')->get();
             $timezones = Timezone::orderBy('time_zone','ASC')->get();
             $edit_route = Config::get('constants.defines.APP_COMPANIES_EDIT');
             $index_route = Config::get('constants.defines.APP_COMPANIES_INDEX');
