@@ -1,67 +1,3 @@
-{{--
-@extends('layouts.adminca')
-@section('content')
-@include('partials.page_heading')
-
-    <div class="page-content fade-in-up">
-        @include('partials.flash')
-        <div class="ibox">
-            <div class="ibox-head">
-                <div class="ibox-title">
-                    {{__($cmsInfo['subTitle'])}} <a href="{{route('pages.create')}}" class="ml-3 btn btn-sm btn-primary pull-right"> <i class="fa fa-plus-circle"></i> {{__('Add')}}</a>
-                </div>
-            </div>
-            <div class="ibox-body">
-                <div class="flexbox mb-4">
-                    <div class="flexbox">
-                        <label class="mb-0 mr-2">{{__("Bulk Action")}}</label>
-                        <select class="selectpicker show-tick form-control mr-2" title="{{__("Bulk Action")}}" data-style="btn-solid" data-width="150px">
-                            <option>{{__("Move to trash")}}</option>
-                        </select>
-                         <button class="btn btn-primary">{{__('Apply')}}</button>
-                    </div>
-
-                    <div class="input-group-icon input-group-icon-left mr-3">
-                        <span class="input-icon input-icon-right font-16"><i class="ti-search"></i></span>
-                        <input class="form-control form-control-rounded form-control-solid" id="key-search" type="text" placeholder="Search">
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-@endsection
-@section('js')
-<script>
-        $(function() {
-            $('#datatable').DataTable({
-                pageLength: 10,
-                fixedHeader: true,
-                responsive: true,
-                "sDom": 'rtip',
-                columnDefs: [{
-                    targets: 'no-sort',
-                    orderable: false
-                }]
-            });
-
-            var table = $('#datatable').DataTable();
-            $('#key-search').on('keyup', function() {
-                table.search(this.value).draw();
-            });
-            $('#type-filter').on('change', function() {
-                table.column(4).search($(this).val()).draw();
-            });
-
-            $('#main-checkbox').click(function(){
-               $('.bulk-action').click();
-            })
-        });
-    </script>
-@endsection
---}}
-
 {{-- Extends Layout --}}
 @extends('layouts.adminca')
 
@@ -84,8 +20,8 @@
     $users = $pages;
     $_pageTitle = (isset($addVarsForView['_pageTitle']) && !empty($addVarsForView['_pageTitle']) ? $addVarsForView['_pageTitle'] : '');
     $_pageSubtitle = (isset($addVarsForView['_pageSubtitle']) && !empty($addVarsForView['_pageSubtitle']) ? $addVarsForView['_pageSubtitle'] : 'List');
-    $_listLink = route('users.index');
-    $_createLink = route('users.create');
+    $_listLink = route('pages.index');
+    $_createLink = route('pages.create');
     $search = "";
     $tableCounter = 0;
     $total = 0;

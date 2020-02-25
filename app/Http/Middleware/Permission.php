@@ -42,6 +42,7 @@ class Permission
         if (array_key_exists($request_action, $pages)) {
             $action_page_id = $pages[$request_action];
             //echo $action_page_id;exit;
+            //dd($user_permissions);
             foreach ($user_permissions as $permission) {
                 if ($permission->page_id == $action_page_id) {
                     $isPermission  = true;
@@ -51,7 +52,7 @@ class Permission
         }
 
 
-        //dd($user_permissions);exit;
+
         if($isPermission){
             return $next($request);
         }

@@ -23,7 +23,7 @@
     <link href="{{ asset('/adminlte/plugins/iCheck/all.css') }}" rel="stylesheet" type="text/css">
     <!-- Select2 -->
     <link href="{{ asset('/adminlte/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
-
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
     <!-- EXTRAS -->
 @stack('head-scripts')
 
@@ -49,6 +49,8 @@
 
     <!-- jQuery 3 -->
     <script src="{{ asset('/adminlte/plugins/jquery/jquery.min.js') }}"></script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- typeahead -->
     <script src="{{ asset('/adminlte/plugins/typeahead/bootstrap3-typeahead.min.js') }}"></script>
 
@@ -167,8 +169,16 @@
             }
         });
     })(jQuery);
-</script>
 
+    function checkAllCheckbox(elem) {
+        $('.bulk-action').prop('checked',false);
+        if($(elem).prop('checked')){
+            $('.bulk-action').prop('checked',true);
+        }
+
+    }
+</script>
+<?php echo toastr()->render(); ?>
 @yield('footer-extras')
 
 @stack('footer-scripts')

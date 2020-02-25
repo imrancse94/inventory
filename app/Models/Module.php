@@ -10,8 +10,8 @@ class Module extends Model
     protected $fillable = [
         'id', 'name', 'icon', 'sequence'
     ];
-    public function getModules(){
-        $modules = $this->all();
+    public function getModules($page_limit = 10){
+        $modules = $this::query()->paginate($page_limit);
 
         return $modules;
     }

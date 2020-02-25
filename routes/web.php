@@ -61,9 +61,9 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
 
 
     Route::get('/companies','CompanyController@index')->name('companies.index');
-    Route::get('/companies/{id}','CompanyController@view')->name('companies.view');
-    Route::match(['get', 'post'],'/companies/create','CompanyController@index')->name('companies.create');
-    Route::match(['get', 'post'],'/companies/{id}/edit','CompanyController@edit')->name('companies.edit');
+    Route::get('/companies/view/{id}','CompanyController@view')->name('companies.view');
+    Route::match(['get', 'post'],'/companies/create','CompanyController@create')->name('companies.create');
+    //Route::match(['get', 'post'],'/companies/{id}/edit','CompanyController@edit')->name('companies.edit');
     //Route::put('/companies/{id}','CompanyController@edit')->name('companies.update');
     Route::delete('/companies/{id}','CompanyController@destroy')->name('companies.delete');
 
@@ -76,7 +76,7 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
     Route::delete('/rolepages/{id}', 'RolePageController@destroy')->name('rolepages.delete');
 
 
-    Route::match(['get', 'post'],'/companies/create','CompanyController@index')->name('companies.create');
+    //Route::match(['get', 'post'],'/companies/create','CompanyController@index')->name('companies.create');
     //Modules
     Route::get('modules', 'ModuleController@index')->name('modules.index');
     Route::match(['get','post'],'modules/add', 'ModuleController@create')->name('modules.create');

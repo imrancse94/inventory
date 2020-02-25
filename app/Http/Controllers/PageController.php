@@ -81,7 +81,7 @@ class PageController extends Controller
             'subModuleTitle' =>__("Page Management"),
             'subTitle'=>__("Edit Page")
         ];
-        $dynamic_route = Config::get('constants.defines.APP_PAGES_EDIT');
+        $dynamic_route = 'pages.edit';
         $isEdit = true;
         $page = Page::find($id);
         $module = new Module();
@@ -140,16 +140,15 @@ class PageController extends Controller
             $pageEdit = $page->update([
                 'id' => $request->id,
                 'module_id' => $request->module_id,
-                'sub_module_id' => $request->sub_module_id,
+                'submodule_id' => $request->sub_module_id,
                 'name' => $request->name,
-                'method_name' => $request->method_name,
-                'method_type' => $request->method_type,
-                'available_to_company' => $request->available_to_company
+                'route_name' => $request->method_name
             ]);
             if($pageEdit){
-                flash(__('The record has been updated successfully!'),'success');
+                //flash(__('The record has been updated successfully!'),'success');
+                toastSuccess('The record has been updated successfully!');
             }
-            return redirect(route(Config::get('constants.defines.APP_PAGES_INDEX')));
+            return redirect(route('pages.index'));
        } else {
 
            if($id > 0){

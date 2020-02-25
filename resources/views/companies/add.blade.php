@@ -1,4 +1,4 @@
-@extends('layouts.adminca')
+{{--@extends('layouts.adminca')
 @section('content')
 
     @include('partials.page_heading')
@@ -12,7 +12,8 @@
             </div>
             <div class="ibox-body">
                 <div class="box-header with-border">
-                    {{--<h3 class="box-title">{{__('Create User')}}</h3>--}}
+<h3 class="box-title">{{__('Create User')}}</h3>
+
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
@@ -22,9 +23,12 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="ibox">
-                                {{--<div class="ibox-head">--}}
-                                {{--<div class="ibox-title">Base Form Controls</div>--}}
-                                {{--</div>--}}
+<div class="ibox-head">
+
+<div class="ibox-title">Base Form Controls</div>
+
+</div>
+
                                 <div class="ibox-body">
                                     <div class="form-group mb-4">
                                         <label for="name">{{__('Company Name')}}</label>
@@ -104,7 +108,8 @@
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="logo">{{__('Logo')}} </label><br>
-                                        {{--<input name="logo" id="logo" class="form-control" type="file" placeholder="Logo" >--}}
+<input name="logo" id="logo" class="form-control" type="file" placeholder="Logo" >
+
                                         <label class="btn btn-info file-input mr-2">
                                             <span class="btn-icon"><i class="la la-upload"></i>{{__('Browse file')}}</span>
                                             <input name="logo" id="logo" class="form-control" type="file" placeholder="{{__('Logo')}}" value="{{ old('logo') }}" required>
@@ -120,9 +125,12 @@
                         </div>
                         <div class="col-md-6">
                             <div class="ibox">
-                                {{--<div class="ibox-head">--}}
-                                {{--<div class="ibox-title">Line Style Controls</div>--}}
-                                {{--</div>--}}
+<div class="ibox-head">
+
+<div class="ibox-title">Line Style Controls</div>
+
+</div>
+
                                 <div class="ibox-body">
                                     <div class="form-group mb-4">
                                         <label for="cname">{{__('Contact Name')}}</label>
@@ -254,7 +262,8 @@
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="profile">{{__('Profile')}} </label><br>
-                                        {{--<input name="logo" id="logo" class="form-control" type="file" placeholder="Logo" >--}}
+<input name="logo" id="logo" class="form-control" type="file" placeholder="Logo" >
+
                                         <label class="btn btn-info file-input mr-2">
                                             <span class="btn-icon"><i class="la la-upload"></i>{{__('Browse file')}}</span>
                                             <input name="profile" id="profile" class="form-control" type="file" placeholder="{{__('Profile')}}" value="{{ old('profile') }}" required>
@@ -276,6 +285,7 @@
 
                     </div>
                 </form>
+
             </div>
             <!-- /.box -->
         </div>
@@ -349,9 +359,10 @@
 @section('js')
     <script src="{{asset('adminca')}}/assets/js/scripts/form-plugins.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-    {{--<script>
+<script>
         $('.select2').select2()
-    </script>--}}
+    </script>
+
     <script>
         $(document).ready(function() {
             $('#country').select2({
@@ -380,5 +391,186 @@
         $("textarea[required]").siblings("label").addClass("required");
         $("select[required]").siblings("label").addClass("required");
         $("input[required]").parent().siblings("label").addClass("required");
+    </script>
+@endsection--}}
+{{-- Extends Layout --}}
+@extends('layouts.adminca')
+
+{{-- Breadcrumbs --}}
+
+
+{{-- Page Title --}}
+@section('page-title', $cmsInfo['subTitle'])
+
+{{-- Page Subtitle --}}
+@section('page-subtitle', config('app.app_name'))
+
+{{-- Header Extras to be Included --}}
+@section('head-extras')
+
+@endsection
+
+@section('content')
+    <?php
+    $_pageTitle = (isset($addVarsForView['_pageTitle']) && !empty($addVarsForView['_pageTitle']) ? $addVarsForView['_pageTitle'] : '');
+    $_pageSubtitle = (isset($addVarsForView['_pageSubtitle']) && !empty($addVarsForView['_pageSubtitle']) ? $addVarsForView['_pageSubtitle'] : 'Add Company');
+    $_listLink = route('companies.index');
+
+    ?>
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">{{$_pageSubtitle}}</h3>
+            <div class="box-tools pull-right">
+                <a href="{{ $_listLink }}" class="btn btn-sm btn-primary pull-right">
+                    <i class="fa fa-list"></i> <span>List</span>
+                </a>
+            </div>
+        </div>
+        {{--@includeIf($resourceAlias.'._search')--}}
+
+        <div class="box-body">
+            <div class="ibox-body">
+                <form role="form" action="{{route('companies.create')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="ibox">
+                                <div class="ibox-body">
+                                    <div class="form-group mb-4">
+                                        <label for="name">{{__('Company Name')}}</label>
+                                        <input name="name" id="name" class="form-control" type="text" placeholder="{{__('Company Name')}}" value="{{ old('name') }}" required>
+                                        @if($errors->has('name'))
+                                            <label class="help-block error">{{__($errors->first('name'))}}</label>
+                                        @endif
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="phone">{{__('Email')}}</label>
+                                        <input name="phone" id="phone" class="form-control" type="text" placeholder="Phone" value="{{ old('phone') }}" required>
+                                        @if($errors->has('email'))
+                                            <label class="help-block error">{{__($errors->first('email'))}}</label>
+                                        @endif
+                                    </div>
+
+                                   {{-- <div class="form-group mb-4">
+                                        <label>{{__('Address 1')}}</label>
+                                        <textarea name="address1" id="address1"  class="form-control" rows="2" placeholder="{{__('Address 1')}}" required>{{ old('address1') }}</textarea>
+                                        @if($errors->has('address1'))
+                                            <label class="help-block error">{{__($errors->first('address1'))}}</label>
+                                        @endif
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="fax">{{__('Fax')}}</label>
+                                        <input name="fax" id="fax" class="form-control" type="text" placeholder="{{__('Fax')}}" value="{{ old('fax') }}">
+                                        @if($errors->has('fax'))
+                                            <label class="help-block error">{{__($errors->first('fax'))}}</label>
+                                        @endif
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label>{{__('Country')}}</label>
+                                        <select name="country" id="country" class="form-control" required value="{{ old('country') }}">
+                                            <option></option>
+                                            @foreach($countries as $country)
+                                                <option value="{{$country->country_code}}">{{$country->country_name}}</option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->has('country'))
+                                            <label class="help-block error">{{__($errors->first('country'))}}</label>
+                                        @endif
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="state">{{__('State')}}</label>
+                                        <input name="state" id="state" class="form-control" type="text" placeholder="{{__('State')}}" value="{{ old('state') }}" required>
+                                        @if($errors->has('state'))
+                                            <label class="help-block error">{{__($errors->first('state'))}}</label>
+                                        @endif
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="city">{{__('City')}}</label>
+                                        <input name="city" id="city" class="form-control" type="text" placeholder="{{__('City')}}" value="{{ old('city') }}" required>
+                                        @if($errors->has('city'))
+                                            <label class="help-block error">{{__($errors->first('city'))}}</label>
+                                        @endif
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label>{{__('PhoTimeZonene')}}</label>
+                                        <select name="timezone" id="timezone" class="form-control" required value="{{ old('timezone') }}" >
+                                            <option></option>
+                                            @foreach($timezones as $timezone)
+                                                <option value="{{$timezone->id}}">{{'['.$timezone->utc_offset.'] '.$timezone->time_zone}}</option>
+                                            @endforeach
+                                        </select>
+                                        @if($errors->has('timezone'))
+                                            <label class="help-block error">{{__($errors->first('timezone'))}}</label>
+                                        @endif
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="Postcode">{{__('Post Code')}}</label>
+                                        <input name="postcode" id="postcode" class="form-control" type="text" placeholder="{{__('Post Code')}}" value="{{ old('postcode') }}" required>
+                                        @if($errors->has('postcode'))
+                                            <label class="help-block error">{{__($errors->first('postcode'))}}</label>
+                                        @endif
+                                    </div>
+                                    <div class="form-group mb-4">
+                                        <label for="logo">{{__('Logo')}} </label><br>
+                                        <input name="logo" id="logo" class="form-control" type="file" placeholder="Logo" >
+                                        @if($errors->has('logo'))
+                                            <label class="help-block error">{{__($errors->first('logo'))}}</label>
+                                        @endif
+                                    </div>--}}
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="submit" value="{{__('Save')}}" class="btn btn-primary">
+                            <a type="button" href="{{$_listLink}}" class="btn btn-default">{{__('Back')}}</a>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </div>
+
+
+@endsection
+
+{{-- Footer Extras to be Included --}}
+@section('footer-extras')
+
+@endsection
+@section('js')
+    <script src="{{asset('adminca')}}/assets/js/scripts/form-plugins.js"></script>
+    <script>
+        $(document).on('change', '#module_id', function () {
+            var selectedValue = $(this).val();
+            $("#sub_module_id").html('<option value="" selected disabled>{{__("Please select")}}</option>');
+            $('#loader').removeClass('d-none');
+            if(selectedValue) {
+                $.ajax({
+                    type: "GET",
+                    url: '{{url("pages/getassociation/")}}/'+selectedValue,
+                    dataType: "json",
+                    success: function (response) {
+                        $('#loader').addClass('d-none');
+                        $("#sub_module_id").html(response.submodule_content);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('error');
+                    }
+                });
+            }
+        });
+
+        $(document).ready(function(){
+            $('#module_id').change();
+        });
     </script>
 @endsection

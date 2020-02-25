@@ -27,4 +27,11 @@ class Submodule extends Model
     public function getPages(){
         return $this->belongsTo('\App\Models\Page', 'sub_module_id');
     }
+
+    public function insert_entry($inputData){
+        $inputData['name'] = $inputData['submodule_name'];
+        $inputData['icon'] = $inputData['submodule_icon'];
+       return Submodule::update($inputData);
+
+    }
 }

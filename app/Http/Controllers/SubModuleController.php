@@ -31,13 +31,14 @@ class SubModuleController extends Controller
 //        $cache = Cache::get('footer');
 //        dd($cache);
 
-            $cmsInfo = [
-                'moduleTitle'=>__("Master Data"),
-                'subModuleTitle' =>__("Submodules")
-            ];
-
+        $cmsInfo = [
+            'moduleTitle'=>__("Master Data"),
+            'subModuleTitle' =>__("Submodule Management"),
+            'subTitle'=>__("Add Submodule")
+        ];
+            $page_limit = 10;
             $user = Auth::user();
-            $submodules = SubModule::with('modules')->get();
+            $submodules = SubModule::with('modules')->paginate($page_limit);
             //dd($modules);exit;
             return view('submodules.index', compact('cmsInfo','submodules'));
     }
@@ -47,8 +48,8 @@ class SubModuleController extends Controller
     {
         $cmsInfo = [
             'moduleTitle'=>__("Master Data"),
-            'subModuleTitle' =>__("Submodules")
-
+            'subModuleTitle' =>__("Submodule Management"),
+            'subTitle'=>__("Add Submodule")
         ];
         $module = new Module();
         $modules = $module->getModules();
@@ -99,7 +100,7 @@ class SubModuleController extends Controller
              flash(__('The record has been saved successfully!'),'success');
             return redirect(route(Config::get('constants.defines.APP_SUBMODULES_INDEX') ));
         }
-        
+
         return $this->showAddForm();
     }
 
@@ -114,12 +115,12 @@ class SubModuleController extends Controller
             'subModuleTitle' =>__("Sub Module Management"),
             'subTitle'=>__("SubModule edit")
         ];
-        $dynamic_route = Config::get('constants.defines.APP_SUBMODULES_EDIT');
+        $dynamic_route = 'submodules.edit';
         $isEdit = true;
-        $submodules = SubModule::with('usertype_submodules')->find($id);
+        $submodules = SubModule::find($id);
         $module = new Module();
         $modules = $module->getModules();
-        $user_types = $this->get_user_types();
+       // $user_types = $this->get_user_types();
 //        dd($submodules->usertype_submodules);
 //        $usertype_submodules = UsertypeSubmodule::where('sub_module_id', $id)->get();
         return view('submodules.edit_view', compact('cmsInfo','dynamic_route','isEdit','submodules','modules','user_types'));
@@ -150,39 +151,31 @@ class SubModuleController extends Controller
     public function edit(Request $request, $id = null)
     {
         if($request->isMethod('post')){
- 
+
             $rules = [
                 'module_id'=>'required',
-                'submodule_id'=>'required|integer|unique:sub_modules,id,'.$request->id.'id',
+                'submodule_id'=>'required|integer|unique:submodules,id,'.$request->id.'id',
                 'submodule_name'=>'required',
                 'submodule_icon'=>'required',
                 'sequence'=>'required|integer',
                 'controller_name'=>'required',
                 'default_method'=>'required',
-                'user_type_id'=>'required'
             ];
-    
+
             $this->validate($request, $rules);
             $input = $request->all();
             $submodule = SubModule::find($request->subold_id);
             $submoduleSave = $submodule->insert_entry($input);
-            if (!empty($input['user_type_id'])) {
-                UsertypeSubmodule::where('sub_module_id', $input['submodule_id'])->delete();
-                foreach($input['user_type_id'] as $value) {
-                    UsertypeSubmodule::create([
-                        'user_type_id'=> $value,
-                        'sub_module_id'=>$input['submodule_id']
-                    ]);
-                }
-            }
+
             if($submoduleSave){
-                flash(__('The record has been updated successfully!'),'success');
+                toastSuccess('The record has been updated successfully!');
+            }else{
+                toastError('The record has not been updated.Please try again');
             }
-    
-            return redirect(route(Config::get('constants.defines.APP_SUBMODULES_INDEX')));
-        
+
+            return redirect(route('submodules.index'));
+
         } else {
-        
             if($id > 0){
                 return $this->showeditform($id);
             }

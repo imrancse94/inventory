@@ -3,12 +3,7 @@
         <thead class="thead-default thead-lg">
         <tr>
             <th class="no-sort">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"/>
-                    </label>
-                </div>
-
+                <input type="checkbox" onclick="checkAllCheckbox(this)"/>
             </th>
             <th>{{__('Page Id')}}</th>
             <th>{{__('Module Name')}}</th>
@@ -25,10 +20,7 @@
             @foreach($pages as $page)
                 <tr>
                     <td>
-                        <label class="checkbox checkbox-ebony">
-                            <input name="pageCheckbox[]" value="{{$page->id}}" type="checkbox" class="bulk-action">
-                            <span class="input-span"></span>
-                        </label>
+                        <input name="pageCheckbox[]" value="{{$page->id}}" type="checkbox" class="bulk-action">
                     </td>
                     <td>{{$page->id}}</td>
                     <td>{{__($page->modules['name'])}}</td>
@@ -52,3 +44,4 @@
         </tbody>
     </table>
 </div>
+

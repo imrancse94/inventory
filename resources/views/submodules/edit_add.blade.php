@@ -1,16 +1,41 @@
+
+{{-- Extends Layout --}}
 @extends('layouts.adminca')
+
+{{-- Breadcrumbs --}}
+
+
+{{-- Page Title --}}
+@section('page-title', $cmsInfo['subTitle'])
+
+{{-- Page Subtitle --}}
+@section('page-subtitle', config('app.app_name'))
+
+{{-- Header Extras to be Included --}}
+@section('head-extras')
+
+@endsection
+
 @section('content')
-    @include('partials.page_heading')
-    <div class="page-content fade-in-up">
-        <div class="ibox">
-            <div class="ibox-head">
-                <div class="ibox-title">
-                    {{__($cmsInfo['subModuleTitle'])}} <a href="{{route('submodules.index')}}" class="ml-3 btn btn-sm btn-primary pull-right"><i class="fa fa-list-ul"></i> {{__('List')}}</a>
-                </div>
+    <?php
+    $_pageTitle = (isset($addVarsForView['_pageTitle']) && !empty($addVarsForView['_pageTitle']) ? $addVarsForView['_pageTitle'] : '');
+    $_pageSubtitle = (isset($addVarsForView['_pageSubtitle']) && !empty($addVarsForView['_pageSubtitle']) ? $addVarsForView['_pageSubtitle'] : 'ADD');
+    $_listLink = route('modules.index');
+
+    ?>
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">{{$_pageSubtitle}}</h3>
+            <div class="box-tools pull-right">
+                <a href="{{ $_listLink }}" class="btn btn-sm btn-primary pull-right">
+                    <i class="fa fa-list"></i> <span>List</span>
+                </a>
             </div>
+        </div>
+        {{--@includeIf($resourceAlias.'._search')--}}
+
+        <div class="box-body no-padding">
             <div class="ibox-body">
-                <!-- /.box-header -->
-                <!-- form start -->
                 <form role="form" action="{{route('submodules.create')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
@@ -23,10 +48,10 @@
                                         <label class="help-block error">{{$errors->first('submodule_id')}}</label>
                                     @endif
                                 </div>
-<!--                                --><?php //dd($modules) ?>
+                                <!--                                --><?php //dd($modules) ?>
                                 <div class="form-group {{$errors->has('module_name') ? 'has-error':''}}">
                                     <label for="email">{{__('Module Name')}}</label>
-                                    <select class="form-control" name="module_id" id="module_name">
+                                    <select class="form-control select2" name="module_id" id="module_name">
 
                                         @if(!empty($modules))
                                             @foreach($modules as $module)
@@ -34,7 +59,8 @@
                                             @endforeach
                                         @endif
                                     </select>
-                                    {{--<input type="text" class="form-control" name="module_name" id="email" placeholder="{{__('Module Name')}}" value="{{isset($user->email) ? $user->email : ''}}" required/>--}}
+                                    {{--<input type="text" class="form-control" name="module_name" id="email" placeholder="{{__('Module Name')}}" value="{{isset($user->email) ? $user->email : ''}}" required/>
+--}}
                                     @if($errors->has('module_name'))
                                         <label class="help-block error">{{$errors->first('module_name')}}</label>
                                     @endif
@@ -59,22 +85,22 @@
                                     @if($errors->has('sequence'))
                                         <label class="help-block error">{{$errors->first('sequence')}}</label>
                                     @endif
+                                </div>
+                                <div class="form-group {{$errors->has('controller_name') ? 'has-error':''}}">
+                                    <label for="controller_name">{{__('Controller Name')}}</label>
+                                    <input type="text" class="form-control" name="controller_name" id="controller_name" placeholder="{{__('Controller Name')}}" required>
+                                    @if($errors->has('controller_name'))
+                                        <label class="help-block error">{{$errors->first('controller_name')}}</label>
+                                    @endif
+                                </div>
+                                <div class="form-group {{$errors->has('default_method') ? 'has-error':''}}">
+                                    <label for="default_method">{{__('Default Method Name')}}</label>
+                                    <input type="text" class="form-control" name="default_method" id="default_method" placeholder="{{__('Default Method Name')}}" required>
+                                    @if($errors->has('default_method'))
+                                        <label class="help-block error">{{$errors->first('default_method')}}</label>
+                                    @endif
+                                </div>
                             </div>
-                            <div class="form-group {{$errors->has('controller_name') ? 'has-error':''}}">
-                                <label for="controller_name">{{__('Controller Name')}}</label>
-                                <input type="text" class="form-control" name="controller_name" id="controller_name" placeholder="{{__('Controller Name')}}" required>
-                                @if($errors->has('controller_name'))
-                                    <label class="help-block error">{{$errors->first('controller_name')}}</label>
-                                @endif
-                        </div>
-                        <div class="form-group {{$errors->has('default_method') ? 'has-error':''}}">
-                            <label for="default_method">{{__('Default Method Name')}}</label>
-                            <input type="text" class="form-control" name="default_method" id="default_method" placeholder="{{__('Default Method Name')}}" required>
-                            @if($errors->has('default_method'))
-                                <label class="help-block error">{{$errors->first('default_method')}}</label>
-                            @endif
-                        </div>
-                    </div>
                             <!-- /.box-body -->
 
                             <div class="box-footer">
@@ -84,14 +110,44 @@
                         </div>
                     </div>
                 </form>
+
             </div>
-            <!-- /.box -->
         </div>
+        <!-- /.box-body -->
     </div>
+
+
+@endsection
+
+{{-- Footer Extras to be Included --}}
+@section('footer-extras')
+
 @endsection
 @section('js')
     <script src="{{asset('adminca')}}/assets/js/scripts/form-plugins.js"></script>
-    {{--<script>
-        $('.select2').select2()
-    </script>--}}
+    <script>
+        $(document).on('change', '#module_id', function () {
+            var selectedValue = $(this).val();
+            $("#sub_module_id").html('<option value="" selected disabled>{{__("Please select")}}</option>');
+            $('#loader').removeClass('d-none');
+            if(selectedValue) {
+                $.ajax({
+                    type: "GET",
+                    url: '{{url("pages/getassociation/")}}/'+selectedValue,
+                    dataType: "json",
+                    success: function (response) {
+                        $('#loader').addClass('d-none');
+                        $("#sub_module_id").html(response.submodule_content);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('error');
+                    }
+                });
+            }
+        });
+
+        $(document).ready(function(){
+            $('#module_id').change();
+        });
+    </script>
 @endsection

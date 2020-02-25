@@ -1,117 +1,68 @@
+{{-- Extends Layout --}}
 @extends('layouts.adminca')
+
+{{-- Breadcrumbs --}}
+
+
+{{-- Page Title --}}
+@section('page-title', $cmsInfo['subTitle'])
+
+{{-- Page Subtitle --}}
+@section('page-subtitle', config('app.app_name'))
+
+{{-- Header Extras to be Included --}}
+@section('head-extras')
+
+@endsection
+
 @section('content')
-@include('partials.page_heading')
-
-<div class="page-content fade-in-up">
-    @include('partials.flash')
-    <div class="ibox">
-        <div class="ibox-head">
-            <div class="ibox-title">
-                {{__($cmsInfo['subTitle'])}} <a href="{{route('modules.create')}}" class="ml-3 btn btn-sm btn-primary pull-right"> <i class="fa fa-plus-circle"></i> {{__('Add')}}</a>
-            </div>
+    <?php
+    $users = $modules;
+    $_pageTitle = (isset($addVarsForView['_pageTitle']) && !empty($addVarsForView['_pageTitle']) ? $addVarsForView['_pageTitle'] : '');
+    $_pageSubtitle = (isset($addVarsForView['_pageSubtitle']) && !empty($addVarsForView['_pageSubtitle']) ? $addVarsForView['_pageSubtitle'] : 'List');
+    $_listLink = route('modules.index');
+    $_createLink = route('modules.create');
+    $search = "";
+    $tableCounter = 0;
+    $total = 0;
+    if (count($users) > 0) {
+        $total = $users->total();
+        $tableCounter = ($users->currentPage() - 1) * $users->perPage();
+        $tableCounter = $tableCounter > 0 ? $tableCounter : 0;
+    }
+    ?>
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">{{ $_pageSubtitle }}</h3>
+            @include('common.search')
         </div>
-        <div class="ibox-body">
-            <div class="flexbox mb-4">
-                <div class="flexbox">
-                    <label class="mb-0 mr-2">{{__("Bulk Action")}}</label>
-                    <select class="selectpicker show-tick form-control mr-2" title="{{__("Bulk Action")}}" data-style="btn-solid" data-width="150px">
-                        <option>{{__("Move to trash")}}</option>
-                    </select>
-                     <button class="btn btn-primary">{{__('Apply')}}</button>
+        {{--@includeIf($resourceAlias.'._search')--}}
+
+        <div class="box-body no-padding">
+
+            @if (count($users) > 0)
+                @include('modules.partials.table')
+                <div class="padding-5">
+                    <span class="text-green padding-l-5">Total: {{ $total }} items.</span>&nbsp;
                 </div>
 
-                <div class="input-group-icon input-group-icon-left mr-3">
-                    <span class="input-icon input-icon-right font-16"><i class="ti-search"></i></span>
-                    <input class="form-control form-control-rounded form-control-solid" id="key-search" type="text" placeholder="{{__('Search')}}">
-                </div>
-            </div>
-            <div class="table-responsive row">
-                <table class="table table-bordered table-hover" id="datatable">
-                    <thead class="thead-default thead-lg">
-                        <tr>
-                            <th>
-                                <label class="checkbox checkbox-ebony">
-                                    <input type="checkbox" class="bulk-action" id="main-checkbox">
-                                    <span class="input-span"></span>
-                                </label>
-                            </th>
-                            <th>{{__('Module Id')}}</th>
-                            <th>{{__('Module Name')}}</th>
-                            <th>{{__('Created On')}}</th>
-                            <th>{{__('Modified On')}}</th>
-                            <th class="no-sort text-center">{{__('Actions')}}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if(!empty($modules))
-                            @foreach($modules as $module_id => $module)
-                        <tr>
-                            <td>
-                                <label class="checkbox checkbox-ebony">
-                                    <input name="moduleCheckbox[]" value="{{$module->id}}" type="checkbox" class="bulk-action">
-                                    <span class="input-span"></span>
-                                </label>
-                            </td>
-                            <td>
-                                {{$module->id}}
-                            </td>
-                            <td>{{$module->name}}</td>
-                            <td>{{$module->created_at}}</td>
-                            <td>
-                                {{$module->updated_at}}
-                            </td>
-                            <td class="text-center">
+            @else
+                <p class="margin-l-5 lead text-green">No records found.</p>
+            @endif
 
-                                <a class="text-muted font-16 mr-2" href="{{route('modules.edit',$module->id)}}">
-                                    <i class="ti-pencil-alt"></i>
-                                </a>
-                                <a class="text-muted font-16 mr-2" href="{{route('modules.view',$module->id)}}">
-                                    <i class="ti-eye"></i>
-                                </a>
-                                <a class="text-muted font-16" data-id="{{$module->id}}"  href="#" onclick="deleteAction('delete-form-{{$module->id}}')">
-                                    <i class="ti-trash"></i>
-                                </a>
-                                <form id="delete-form-{{$module->id}}" action="{{route('modules.delete', $module->id)}}" method="post" style="display: none;">
-                                @csrf
-                                @method('DELETE')
-                                </form>
-                            </td>
-                        </tr>
-                            @endforeach
-                        @endif
-                    </tbody>
-                </table>
-            </div>
         </div>
+        <!-- /.box-body -->
+        @if (count($users) > 0)
+            @include('common.paginate', ['records' => $users])
+        @endif
 
     </div>
-</div>
-@endsection
-@section('js')
-<script>
-        $(function() {
-            $('#datatable').DataTable({
-                pageLength: 10,
-                fixedHeader: true,
-                responsive: true,
-                "sDom": 'rtip',
-                columnDefs: [{
-                    targets: 'no-sort',
-                    orderable: false
-                }]
-            });
 
-            var table = $('#datatable').DataTable();
-            $('#key-search').on('keyup', function() {
-                table.search(this.value).draw();
-            });
-            $('#type-filter').on('change', function() {
-                table.column(4).search($(this).val()).draw();
-            });
 
-            $('#main-checkbox').click(function(){
-               $('.bulk-action').click();
-            })
-        });
-    </script>
 @endsection
+
+{{-- Footer Extras to be Included --}}
+@section('footer-extras')
+
+@endsection
+

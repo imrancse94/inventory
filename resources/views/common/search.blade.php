@@ -1,6 +1,6 @@
 <!-- Search -->
 <div class="box-tools pull-right">
-    <form class="form" role="form" method="GET" action="{{ $_listLink }}">
+    <form class="form" role="form" method="GET" action="{{$_listLink }}">
         <div class="input-group input-group-sm margin-r-5 pull-left" style="width: 200px;">
             <input type="text" name="search" class="form-control" value="{{ $search }}" placeholder="Search...">
             <div class="input-group-btn">

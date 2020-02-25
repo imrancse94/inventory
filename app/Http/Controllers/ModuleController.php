@@ -8,6 +8,7 @@ use App\Models\Module;
 use App\Models\SubModule;
 use Session;
 use Config;
+
 class ModuleController extends Controller
 {
     /**
@@ -18,39 +19,42 @@ class ModuleController extends Controller
     public function index()
     {
         $cmsInfo = [
-            'moduleTitle'=>__("Master Data"),
-            'subModuleTitle' =>__("Module Management"),
-            'subTitle'=>__("Module List")
+            'moduleTitle' => __("Master Data"),
+            'subModuleTitle' => __("Module Management"),
+            'subTitle' => __("Module List")
         ];
-        
+
         $SUPER_SUPER_ADMIN_ID = 1;
         $user = Auth::user();
-	$company_id = $user->company_id;	
+        $company_id = $user->company_id;
         $module = new Module;
         $modules = $module->getModules();
         //dd($modules);exit;
-        
-        return view('modules.index', compact('cmsInfo','modules'));
+
+        return view('modules.index', compact('cmsInfo', 'modules'));
     }
 
 
-    private function validation_rule($id = null){
+    private function validation_rule($id = null)
+    {
         return $rules = [
-            'module_name'=>'required|unique:modules,name,'.$id,
-            'module_id'=>'required|integer|unique:modules,id,'.$id,
-            'module_icon'=>'required',
-            'sequence'=>'required|integer'
+            'module_name' => 'required|unique:modules,name,' . $id,
+            'module_id' => 'required|integer|unique:modules,id,' . $id,
+            'module_icon' => 'required',
+            'sequence' => 'required|integer'
         ];
     }
 
-    private function input_array($input){
+    private function input_array($input)
+    {
         return [
-            'id'=>$input['module_id'],
-            'name'=>$input['module_name'],
+            'id' => $input['module_id'],
+            'name' => $input['module_name'],
             'icon' => $input['module_icon'],
-            'sequence'=>$input['sequence']
+            'sequence' => $input['sequence']
         ];
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -58,16 +62,16 @@ class ModuleController extends Controller
      */
     public function create(Request $request)
     {
-        if($request->isMethod('post')){
-        $rules = $this->validation_rule('');
-        $this->validate($request, $rules);
-        $input = $request->all();
-        $input_array = $this->input_array($input);
-        $module  = Module::create($input_array);
-        flash(__('The record has been saved successfully!'),'success');
-        return redirect(route(Config::get('constants.defines.APP_MODULES_INDEX')));
+        if ($request->isMethod('post')) {
+            $rules = $this->validation_rule('');
+            $this->validate($request, $rules);
+            $input = $request->all();
+            $input_array = $this->input_array($input);
+            $module = Module::create($input_array);
+            flash(__('The record has been saved successfully!'), 'success');
+            return redirect(route(Config::get('constants.defines.APP_MODULES_INDEX')));
         }
-        
+
         return $this->showAddForm();
     }
 
@@ -75,90 +79,93 @@ class ModuleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        
-    }
-    
-    public function showeditform($id){
-        $cmsInfo = [
-            'moduleTitle'=>__("Master Data"),
-            'subModuleTitle' =>__("Module Management"),
-            'subTitle'=>__("Edit Module")
-        ];
-        $dynamic_route = Config::get('constants.defines.APP_MODULES_EDIT');
-        $isEdit = true;
-        $module = Module::find($id);
-        return view('modules.edit_view', compact('cmsInfo','dynamic_route','isEdit','module'));
+
     }
 
-    public function view($id){
+    public function showeditform($id)
+    {
         $cmsInfo = [
-            'moduleTitle'=>__("Master Data"),
-            'subModuleTitle' =>__("Module Management"),
-            'subTitle'=>__("View Module")
+            'moduleTitle' => __("Master Data"),
+            'subModuleTitle' => __("Module Management"),
+            'subTitle' => __("Edit Module")
         ];
-        $dynamic_route = Config::get('constants.defines.APP_MODULES_EDIT');
+        $dynamic_route = 'modules.edit';
+        $isEdit = true;
+        $module = Module::find($id);
+        return view('modules.edit_view', compact('cmsInfo', 'dynamic_route', 'isEdit', 'module'));
+    }
+
+    public function view($id)
+    {
+        $cmsInfo = [
+            'moduleTitle' => __("Master Data"),
+            'subModuleTitle' => __("Module Management"),
+            'subTitle' => __("View Module")
+        ];
+        $dynamic_route = 'modules.edit';
         $isEdit = false;
         $module = Module::find($id);
-        return view('modules.edit_view', compact('cmsInfo','dynamic_route','isEdit','module'));
+        return view('modules.edit_view', compact('cmsInfo', 'dynamic_route', 'isEdit', 'module'));
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function showAddForm()
     {
-       $cmsInfo = [
-           'moduleTitle'=>__("Master Data"),
-           'subModuleTitle' =>__("Module Management"),
-           'subTitle'=>__("Add Module")
+        $cmsInfo = [
+            'moduleTitle' => __("Master Data"),
+            'subModuleTitle' => __("Module Management"),
+            'subTitle' => __("Add Module")
         ];
-       
+
         $dynamic_route = Config::get('constants.defines.APP_MODULES_CREATE');
-        return view('modules.edit_add', compact('cmsInfo','dynamic_route'));
+        return view('modules.edit_add', compact('cmsInfo', 'dynamic_route'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(Request $request, $id = null)
     {
-        if($request->isMethod('post')){
-        $rules = $this->validation_rule($request->id);
-        $this->validate($request, $rules);
-        $input = $request->all();
-        $input_array = $this->input_array($input);
-        $module = Module::find($request->old_id);
-        $moduleSave = $module->update($input_array);
-        if($moduleSave){
-            flash(__('The record has been updated successfully!'),'success');
-        }
-        
-        return redirect(route(Config::get('constants.defines.APP_MODULES_INDEX')));
-        
+        if ($request->isMethod('post')) {
+            $rules = $this->validation_rule($request->id);
+            $this->validate($request, $rules);
+            $input = $request->all();
+            $input_array = $this->input_array($input);
+            $module = Module::find($request->old_id);
+            $moduleSave = $module->update($input_array);
+            if ($moduleSave) {
+                toastSuccess('The record has been updated successfully!');
+            }
+
+            return redirect(route('modules.index'));
+
         } else {
-        
-            if($id > 0){
+
+            if ($id > 0) {
                 return $this->showeditform($id);
             }
-        
+
         }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -169,22 +176,22 @@ class ModuleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        if($id == Auth::user()->id) {
+        if ($id == Auth::user()->id) {
             flash(__("You can't Delete Yourself!"), 'danger');
             return back();
         }
         $submodule = SubModule::where('module_id', $id)->first();
-        if(empty($submodule)) {
+        if (empty($submodule)) {
             $module = Module::find($id);
             $module->delete();
             flash(__('The record has been deleted successfully!'), 'success');
         } else {
-            flash(__('This Module Is Being Used'),'danger');
+            flash(__('This Module Is Being Used'), 'danger');
         }
         return back();
     }

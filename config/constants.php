@@ -44,17 +44,17 @@ return [
         'APP_USERGROUPS_DELETE' => 'usergroups.delete',
 
         'APP_MODULES_INDEX' => 'module.index',
-        'APP_MODULES_CREATE' => 'module.create',
+        'APP_MODULES_CREATE' => 'modules.create',
         'APP_MODULES_EDIT' => 'module.edit',
         'APP_MODULES_DELETE' => 'module.destroy',
 
         'APP_SUBMODULES_INDEX' => 'module.index',
-        'APP_SUBMODULES_CREATE' => 'module.create',
+        'APP_SUBMODULES_CREATE' => 'modules.create',
         'APP_SUBMODULES_EDIT' => 'module.edit',
         'APP_SUBMODULES_DELETE' => 'module.destroy',
 
         'APP_PAGES_INDEX' => 'page.index',
-        'APP_PAGES_CREATE' => 'page.create',
+        'APP_PAGES_CREATE' => 'pages.create',
         'APP_PAGES_EDIT' => 'page.edit',
         'APP_PAGES_DELETE' => 'page.destroy',
 

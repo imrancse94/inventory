@@ -3,10 +3,7 @@
         <thead class="thead-default thead-lg">
         <tr>
             <th>
-                <label class="checkbox checkbox-ebony">
-                    <input type="checkbox" class="bulk-action" id="main-checkbox">
-                    <span class="input-span"></span>
-                </label>
+                <input type="checkbox" onclick="checkAllCheckbox(this)">
             </th>
             <th>{{__('Module Id')}}</th>
             <th>{{__('Module Name')}}</th>
@@ -20,10 +17,7 @@
             @foreach($modules as $module_id => $module)
                 <tr>
                     <td>
-                        <label class="checkbox checkbox-ebony">
-                            <input name="moduleCheckbox[]" value="{{$module->id}}" type="checkbox" class="bulk-action">
-                            <span class="input-span"></span>
-                        </label>
+                        <input name="moduleCheckbox[]" value="{{$module->id}}" type="checkbox" class="bulk-action">
                     </td>
                     <td>
                         {{$module->id}}
@@ -34,20 +28,15 @@
                         {{$module->updated_at}}
                     </td>
                     <td class="text-center">
-
-                        <a class="text-muted font-16 mr-2" href="{{route('modules.edit',$module->id)}}">
-                            <i class="ti-pencil-alt"></i>
-                        </a>
-                        <a class="text-muted font-16 mr-2" href="{{route('modules.view',$module->id)}}">
-                            <i class="ti-eye"></i>
-                        </a>
-                        <a class="text-muted font-16" data-id="{{$module->id}}"  href="#" onclick="deleteAction('delete-form-{{$module->id}}')">
-                            <i class="ti-trash"></i>
-                        </a>
+                        <a href="{{route('modules.edit', $module->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                        <a href="{{route('modules.view', $module->id)}}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
+                        <a href="#" class="btn btn-danger btn-sm btnOpenerModalConfirmModelDelete"
+                           data-form-id="{{ $module->id }}"><i class="fa fa-trash-o"></i></a>
                         <form id="delete-form-{{$module->id}}" action="{{route('modules.delete', $module->id)}}" method="post" style="display: none;">
                             @csrf
                             @method('DELETE')
                         </form>
+                    </td>
                     </td>
                 </tr>
             @endforeach
