@@ -2,45 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d1d2190-23aa-4693-9a5d-71e42a6a420b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ModuleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ModuleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SubModuleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SubModuleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/Permission.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/Permission.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Module.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Module.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Submodule.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Submodule.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/roles/partials/table.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/usergroups/partials/table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CompanyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/RoleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/RoleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Traits/CommonLogTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Traits/CommonLogTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsergroupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsergroupController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Company.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Usergroup.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Usergroup.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/adminlte.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/adminlte.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/constants.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/constants.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/toastr.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/toastr.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/seeds/MyCustomDataSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/MyCustomDataSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/common/search.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/common/search.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/companies/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/companies/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/companies/browse.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/companies/browse.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/companies/edit_add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/companies/edit_add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/companies/partials/table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/companies/partials/table.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/adminca.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/adminca.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modules/edit_add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/edit_add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modules/edit_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/edit_view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modules/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/modules/partials/table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/modules/partials/table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/edit_add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/edit_add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/edit_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/edit_view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/pages/partials/table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pages/partials/table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/submodules/edit_add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/submodules/edit_add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/submodules/edit_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/submodules/edit_view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/submodules/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/submodules/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/submodules/partials/table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/submodules/partials/table.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/roles/edit_add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/roles/edit_add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/roles/edit_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/roles/edit_view.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/roles/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/roles/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/usergroups/edit_add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/usergroups/edit_add.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/usergroups/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/usergroups/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/app/public/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/app/public/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/cache/data/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/cache/data/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/sessions/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/sessions/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/testing/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/testing/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/framework/views/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/framework/views/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/logs/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +144,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/usergroups" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
@@ -172,6 +156,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/usergroups" />
+      <recent name="$PROJECT_DIR$/resources/views/roles" />
       <recent name="$PROJECT_DIR$/resources/views/submodules/partisals" />
       <recent name="$PROJECT_DIR$/public/adminlte/img" />
       <recent name="$PROJECT_DIR$/public/adminlte" />
@@ -203,7 +189,9 @@
       <workItem from="1582126927175" duration="2158000" />
       <workItem from="1582437812677" duration="2897000" />
       <workItem from="1582460624711" duration="8721000" />
-      <workItem from="1582604471597" duration="4137000" />
+      <workItem from="1582604471597" duration="9165000" />
+      <workItem from="1582699296758" duration="7964000" />
+      <workItem from="1582722403542" duration="6930000" />
     </task>
     <servers />
   </component>
@@ -215,7 +203,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -226,6 +216,10 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="311" y="58" width="800" height="677" key="#ESLint/67.27.1299.741@67.27.1299.741" timestamp="1581232902423" />
+    <state x="449" y="154" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1582618926950">
+      <screen x="67" y="27" width="1299" height="741" />
+    </state>
+    <state x="449" y="154" width="524" height="484" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/67.27.1299.741@67.27.1299.741" timestamp="1582618926950" />
     <state x="207" y="27" width="1009" height="741" key="CommitChangelistDialog2" timestamp="1582613489586">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
@@ -250,9 +244,13 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="362" y="108" width="868" height="642" key="find.popup/67.27.1299.741@67.27.1299.741" timestamp="1581963544987" />
-    <state x="380" y="175" key="run.anything.popup" timestamp="1581856974074">
+    <state x="380" y="175" key="run.anything.popup" timestamp="1582616630581">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="380" y="175" key="run.anything.popup/67.27.1299.741@67.27.1299.741" timestamp="1581856974074" />
+    <state x="380" y="175" key="run.anything.popup/67.27.1299.741@67.27.1299.741" timestamp="1582616630581" />
+    <state x="380" y="42" width="670" height="676" key="search.everywhere.popup" timestamp="1582617273932">
+      <screen x="67" y="27" width="1299" height="741" />
+    </state>
+    <state x="380" y="42" width="670" height="676" key="search.everywhere.popup/67.27.1299.741@67.27.1299.741" timestamp="1582617273932" />
   </component>
 </project>

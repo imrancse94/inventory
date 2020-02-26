@@ -84,21 +84,21 @@ class User extends Authenticatable
 
     public function add_user($data)
     {
-        $this->first_name = (!empty($data["first_name"])) ? $data["first_name"] : '';
-        $this->last_name = (!empty($data["last_name"])) ? $data["last_name"] : '';
+        /*$this->first_name = (!empty($data["first_name"])) ? $data["first_name"] : '';
+        $this->last_name = (!empty($data["last_name"])) ? $data["last_name"] : '';*/
         $this->name = (!empty($data["cname"])) ? $data["cname"] : $this->first_name . ' ' . $this->last_name;
-        $this->username = (!empty($data["username"])) ? $data["username"] : '';
+        //$this->username = (!empty($data["username"])) ? $data["username"] : '';
         $this->email = (!empty($data["email"])) ? $data["email"] : '';
         $this->phone = (!empty($data["user_phone"])) ? $data["user_phone"] : '';
         $this->password = bcrypt((!empty($data["password"])) ? $data["password"] : '');
-        $this->img_path = (!empty($data["profile"])) ? $data["profile"] : '';
-        $this->language = (!empty($data["language"])) ? $data["language"] : 'en';
+        /*$this->img_path = (!empty($data["profile"])) ? $data["profile"] : '';
+        $this->language = (!empty($data["language"])) ? $data["language"] : 'en';*/
         $this->company_id = (!empty($data["company_id"])) ? $data["company_id"] : 0;
-        $this->fb_id = (!empty($data["fb_id"])) ? $data["fb_id"] : '';
+        //$this->fb_id = (!empty($data["fb_id"])) ? $data["fb_id"] : '';
         $this->permission_version = (!empty($data["permission_version"])) ? $data["permission_version"] : 0;
-        $this->status = (!empty($data["status"])) ? $data["status"] : 1;
+        /*$this->status = (!empty($data["status"])) ? $data["status"] : 1;
         $this->is_admin_verified = (!empty($data["is_admin_verified"])) ? $data["is_admin_verified"] : 0;
-        $this->user_type = (!empty($data["user_type"])) ? $data["user_type"] : 0;
+        $this->user_type = (!empty($data["user_type"])) ? $data["user_type"] : 0;*/
         $this->save();
         return $this;
 

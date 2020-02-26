@@ -13,7 +13,7 @@ class Usergroup extends Model
 
     public static function insert_entry($data){
         $usergroup = new Usergroup();
-        $usergroup->group_name = $data["group_name"];
+        $usergroup->name = $data["group_name"];
         $usergroup->status = 1;
         $usergroup->company_id = $data["company_id"];
         $usergroup->save();
@@ -46,5 +46,5 @@ class Usergroup extends Model
         return $this->find($id);
     }
 
-    
+
 }

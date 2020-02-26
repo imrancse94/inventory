@@ -37,6 +37,9 @@
     <!-- Custom CSS -->
     <link href="{{ asset('/css/backend.css?version=' . config('adminlte.version')) }}" rel="stylesheet">
 
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- VueJS Initialization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script> <!-- axios Initialization -->
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -142,6 +145,7 @@
 <script src="{{ asset('/adminlte/js/adminlte.min.js') }}"></script>
 <!-- Custom Js -->
 <script src="{{ asset('/js/backend.js?version=' . config('adminlte.version')) }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-confirmation/1.0.5/bootstrap-confirmation.min.js"></script>
 <script src="{{ asset('/js/common.js') }}"></script>
 
 <script type="text/javascript">
@@ -177,6 +181,17 @@
         }
 
     }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]',
+            onConfirm: function (event, element) {
+                alert('sssss')
+                $('#confirm-form').submit();
+            }
+        });
+    });
 </script>
 <?php echo toastr()->render(); ?>
 @yield('footer-extras')

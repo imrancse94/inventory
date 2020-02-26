@@ -68,6 +68,7 @@ trait CommonLogTrait
 
     public function validateCompany($id, $table_name){
         $sql = "SELECT company_id FROM ".$table_name." WHERE id =".$id;
+       // echo $sql;exit;
         $execute_query = DB::select($sql);
         if (!empty($execute_query)){
             $company_id =  $execute_query[0]->company_id;
@@ -137,17 +138,17 @@ trait CommonLogTrait
         $physical_template = $template."_".$language;
         $html = view('notifications.'.$physical_template, compact('data'))->render();
         try {
-         
+
           if($user) {
             $user->notify(new SendNotification($html));
           }
         }catch(\Exception $e){
-            
+
         }
     }
 
     public function fileWrite($file_name, $data, $write_enable){
-        
+
         if ($write_enable && !empty($data)){
             $file_path = public_path('files/'.$file_name);
 

@@ -24,9 +24,14 @@ class RoleController extends Controller
         ];
 //        $role = new Role();
 //        $roles = $role->getRoles();
+        if(\request()->wantsJson()){
+            $page_limit = 10;
+            $roles = Role::where('company_id', Auth::user()->company_id)->paginate($page_limit);
+            return response()->json($roles,200);
+        }
 
-        $roles = Role::where('company_id', Auth::user()->company_id)->get();
-
+        $page_limit = 10;
+        $roles = Role::where('company_id', Auth::user()->company_id)->paginate($page_limit);
         return view('roles.index', compact('cmsInfo', 'roles'));
     }
 
@@ -43,7 +48,8 @@ class RoleController extends Controller
                 'company_id' => Auth::user()->company_id
             ]);
             if ($roleAdd) {
-                flash(__('The record has been saved successfully!'), 'success');
+                //flash(__('The record has been saved successfully!'), 'success');
+                toastSuccess('Role has been created successfully!');
             }
             return redirect(route(Config::get('constants.defines.APP_ROLES_INDEX')));
         } else {
@@ -121,14 +127,15 @@ class RoleController extends Controller
 
         if ($request->isMethod('post')) {
             $this->validate($request, [
-                'title' => 'required|max:100|unique:roles,title'
+                'title' => 'required|max:100|unique:roles,title, '.$id
             ]);
             $role = Role::find($request->id);
             $roleEdit = $role->update([
                 'title' => $request->title
             ]);
             if ($roleEdit) {
-                flash(__('The record has been updated successfully!'), 'success');
+                //flash(__('The record has been updated successfully!'), 'success');
+                toastSuccess('Role has been updated successfully!');
             }
             return redirect(route(Config::get('constants.defines.APP_ROLES_INDEX')));
         } else {
@@ -144,7 +151,8 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->showViewForm($id);
+
     }
 
     /**

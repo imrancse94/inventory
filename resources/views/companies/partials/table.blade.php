@@ -21,16 +21,16 @@
                 <td>{{$company->created_at}}</td>
                 <td>{{$company->updated_at}}</td>
                 <td class="text-center">
-                    <a href="{{route('modules.edit', $company->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
-                    <a href="{{route('modules.view', $company->id)}}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
+                    <a href="{{route('companies.edit', $company->id)}}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a>
+                    <a href="{{route('companies.view', $company->id)}}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
                     <a href="#" class="btn btn-danger btn-sm btnOpenerModalConfirmModelDelete"
                        data-form-id="{{ $company->id }}"><i class="fa fa-trash-o"></i></a>
-                    <form id="delete-form-{{$company->id}}" action="{{route('modules.delete', $company->id)}}" method="post" style="display: none;">
+                    <form id="delete-form-{{$company->id}}" action="{{route('companies.delete', $company->id)}}" method="post" style="display: none;">
                         @csrf
                         @method('DELETE')
                     </form>
                 </td>
-                </td>
+
             </tr>
         @endforeach
 

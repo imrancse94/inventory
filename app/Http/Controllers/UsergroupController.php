@@ -23,8 +23,9 @@ class UsergroupController extends Controller
             'subModuleTitle' =>__("User Group Management"),
             'subTitle'=>__("User Group List")
         ];
+        $page_limit = 10;
         $usergroup = new Usergroup();
-        $usergroups = Usergroup::where('company_id', Auth::user()->company_id)->get();
+        $usergroups = Usergroup::where('company_id', Auth::user()->company_id)->paginate($page_limit);
 //dd($usergroups);
         return view('usergroups.index', compact('cmsInfo', 'usergroups'));
     }

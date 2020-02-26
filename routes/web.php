@@ -63,7 +63,7 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
     Route::get('/companies','CompanyController@index')->name('companies.index');
     Route::get('/companies/view/{id}','CompanyController@view')->name('companies.view');
     Route::match(['get', 'post'],'/companies/create','CompanyController@create')->name('companies.create');
-    //Route::match(['get', 'post'],'/companies/{id}/edit','CompanyController@edit')->name('companies.edit');
+    Route::match(['get', 'post'],'/companies/{id}/edit','CompanyController@edit')->name('companies.edit');
     //Route::put('/companies/{id}','CompanyController@edit')->name('companies.update');
     Route::delete('/companies/{id}','CompanyController@destroy')->name('companies.delete');
 
@@ -107,7 +107,7 @@ Route::group(['middleware' => ['auth', 'permission']], function () {
     //Route::post('roles/add', 'RoleController@create')->name('roles.create');
     Route::match(['get','post'],'roles/edit/{id?}', 'RoleController@edit')->name('roles.edit');
     //Route::post('roles/edit', 'RoleController@edit')->name('roles.edit');
-    Route::get('roles/view/{id}', 'RoleController@view')->name('roles.view');
+    Route::get('roles/view/{id}', 'RoleController@show')->name('roles.view');
     Route::delete('roles/destroy/{id}', 'RoleController@destroy')->name('roles.delete');
     //Roles
     //Usergroups

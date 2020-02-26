@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Auth;
 
 class Company extends Model
 {
-    protected $fillable = [
+    /*protected $fillable = [
         "id", "name","cname","cemail","address1","address2","city","state","country","postcode","phone","logo",
         "timezone","registration_no","tax_no","no_of_employees","cmmi_level","yearly_revenue","hourly_rate","daily_rate","fax"
-    ];
+    ];*/
 
     public static function add_company($data){
 
@@ -18,13 +18,13 @@ class Company extends Model
 
         $company = new Company();
         $company->name = (!empty($data["name"]))?$data["name"]:'';
-        $company->cname = (!empty($data["cname"]))?$data["cname"]:'';
-        $company->cemail = (!empty($data["cemail"]))?$data["cemail"]:'';
+        $company->email = (!empty($data["email"]))?$data["email"]:'';
+        //$company->cname = (!empty($data["cname"]))?$data["cname"]:'';
+/*        $company->cemail = (!empty($data["cemail"]))?$data["cemail"]:'';
         $company->address1 = (!empty($data["address1"]))?$data["address1"]:'';
         $company->address2 = (!empty($data["address2"]))?$data["address2"]:'';
         $company->postcode = (!empty($data["postcode"]))?$data["postcode"]:'';
         $company->phone = (!empty($data["phone"]))?$data["phone"]:'';
-        $company->email = (!empty($data["email"]))?$data["email"]:'';
         $company->fax = (!empty($data["fax"]))?$data["cname"]:'';
         $company->city = (!empty($data["city"]))?$data["city"]:'';
         $company->state = (!empty($data["state"]))?$data["state"]:'';
@@ -40,7 +40,7 @@ class Company extends Model
         $company->hourly_rate = (!empty($data["hourly_rate"]))?$data["hourly_rate"]:0;
         $company->daily_rate = (!empty($data["daily_rate"]))?$data["daily_rate"]:0;
         $company->status = (!empty($data["status"]))?$data["status"]:1;
-        $company->added_by = Auth::id();
+        $company->added_by = Auth::id();*/
         $company->save();
         return $company;
     }
@@ -48,9 +48,9 @@ class Company extends Model
     public static function update_entry($data,$id){
         $company = Company::find($id);
         $company->name = (!empty($data["name"]))?$data["name"]:'';
-        $company->cname = (!empty($data["cname"]))?$data["cname"]: $company->cname;
-        $company->cemail = (!empty($data["cemail"]))?$data["cemail"]:$company->cemail;
-        $company->address1 = (!empty($data["address1"]))?$data["address1"]:$company->address1;
+        //$company->cname = (!empty($data["cname"]))?$data["cname"]: $company->cname;
+        $company->email = (!empty($data["cemail"]))?$data["cemail"]:$company->cemail;
+       /* $company->address1 = (!empty($data["address1"]))?$data["address1"]:$company->address1;
         $company->address2 = (!empty($data["address2"]))?$data["address2"]:$company->address2;
         $company->postcode = (!empty($data["postcode"]))?$data["postcode"]:$company->postcode;
         $company->phone = (!empty($data["phone"]))?$data["phone"]:$company->phone;
@@ -70,7 +70,7 @@ class Company extends Model
         $company->hourly_rate = (!empty($data["hourly_rate"]))?$data["hourly_rate"]:$company->hourly_rate;
         $company->daily_rate = (!empty($data["daily_rate"]))?$data["daily_rate"]:$company->daily_rate;
         $company->status = (!empty($data["status"]))?$data["status"]:$company->status;
-        $company->added_by = Auth::id();
+        $company->added_by = Auth::id();*/
         $company->save();
         return $company;
 

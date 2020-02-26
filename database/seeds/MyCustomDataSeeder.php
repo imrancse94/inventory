@@ -111,6 +111,7 @@ class MyCustomDataSeeder extends Seeder
                     (3056, 1003, 2051, 'Add New Role', 'roles.create', 0, '2015-12-09 22:12:02', '2015-12-09 22:12:02'),
                     (3057, 1003, 2051, 'Modify Role', 'roles.edit', 0, '2015-12-09 22:12:03', '2015-12-09 22:12:03'),
                     (3058, 1003, 2051, 'Delete Role', 'roles.delete', 0, '2015-12-09 22:12:03', '2015-12-09 22:12:03'),
+                    (3059, 1003, 2051, 'View Role', 'roles.view', 0, '2015-12-09 22:12:03', '2015-12-09 22:12:03'),
                     (3065, 1003, 2052, 'Usergroup List', 'usergroups.index', 1, '2015-12-09 22:12:03', '2015-12-09 22:12:03'),
                     (3066, 1003, 2052, 'Add New Usergroup', 'usergroups.create', 0, '2015-12-09 22:12:04', '2015-12-09 22:12:04'),
                     (3067, 1003, 2052, 'Modify Usergroup', 'usergroups.edit', 0, '2015-12-09 22:12:04', '2015-12-09 22:12:04'),
@@ -163,7 +164,8 @@ class MyCustomDataSeeder extends Seeder
                         (227, 2, 3079),
                         (228, 2, 3019),
                         (229, 2, 3029),
-                        (230, 2, 3039);";
+                        (230, 2, 3039),
+                        (231, 2, 3059);";
 
         $usergroups = "INSERT INTO `usergroups` (`id`, `name`, `status`, `company_id`, `created_at`, `updated_at`) VALUES
                         (1, 'super-super-admin-group', 1, 1, '2019-03-22 11:38:12', '2015-11-09 23:17:00'),

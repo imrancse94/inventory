@@ -437,29 +437,36 @@
                         <div class="col-md-6">
                             <div class="ibox">
                                 <div class="ibox-body">
-                                    <div class="form-group mb-4">
+                                    <div class="form-group mb-4 {{$errors->has('name') ? 'has-error':''}}">
                                         <label for="name">{{__('Company Name')}}</label>
                                         <input name="name" id="name" class="form-control" type="text" placeholder="{{__('Company Name')}}" value="{{ old('name') }}" required>
                                         @if($errors->has('name'))
                                             <label class="help-block error">{{__($errors->first('name'))}}</label>
                                         @endif
                                     </div>
-                                    <div class="form-group mb-4">
+                                    <div class="form-group mb-4 {{$errors->has('email') ? 'has-error':''}}">
                                         <label for="phone">{{__('Email')}}</label>
-                                        <input name="phone" id="phone" class="form-control" type="text" placeholder="Phone" value="{{ old('phone') }}" required>
+                                        <input name="email" id="phone" class="form-control" type="text" placeholder="Email" value="{{ old('email') }}" required>
                                         @if($errors->has('email'))
                                             <label class="help-block error">{{__($errors->first('email'))}}</label>
                                         @endif
                                     </div>
 
-                                   {{-- <div class="form-group mb-4">
-                                        <label>{{__('Address 1')}}</label>
-                                        <textarea name="address1" id="address1"  class="form-control" rows="2" placeholder="{{__('Address 1')}}" required>{{ old('address1') }}</textarea>
-                                        @if($errors->has('address1'))
-                                            <label class="help-block error">{{__($errors->first('address1'))}}</label>
+                                    <div class="form-group mb-4 {{$errors->has('password') ? 'has-error':''}}">
+                                        <label>{{__('Password')}}</label>
+                                        <input type="password" name="password" id="address1"  class="form-control"  placeholder="{{__('Password')}}" required />
+                                        @if($errors->has('password'))
+                                            <label class="help-block error">{{__($errors->first('password'))}}</label>
                                         @endif
                                     </div>
-                                    <div class="form-group mb-4">
+                                    <div class="form-group mb-4 {{$errors->has('c_password') ? 'has-error':''}}">
+                                        <label>{{__('Confirm Password')}}</label>
+                                        <input type="password" name="c_password" id="address1"  class="form-control" placeholder="{{__('Confirm Password')}}" required />
+                                        @if($errors->has('c_password'))
+                                            <label class="help-block error">{{__($errors->first('c_password'))}}</label>
+                                        @endif
+                                    </div>
+                                    {{--<div class="form-group mb-4">
                                         <label for="fax">{{__('Fax')}}</label>
                                         <input name="fax" id="fax" class="form-control" type="text" placeholder="{{__('Fax')}}" value="{{ old('fax') }}">
                                         @if($errors->has('fax'))
@@ -509,13 +516,6 @@
                                         <input name="postcode" id="postcode" class="form-control" type="text" placeholder="{{__('Post Code')}}" value="{{ old('postcode') }}" required>
                                         @if($errors->has('postcode'))
                                             <label class="help-block error">{{__($errors->first('postcode'))}}</label>
-                                        @endif
-                                    </div>
-                                    <div class="form-group mb-4">
-                                        <label for="logo">{{__('Logo')}} </label><br>
-                                        <input name="logo" id="logo" class="form-control" type="file" placeholder="Logo" >
-                                        @if($errors->has('logo'))
-                                            <label class="help-block error">{{__($errors->first('logo'))}}</label>
                                         @endif
                                     </div>--}}
 
